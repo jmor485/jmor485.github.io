@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Psychic Game</title>
+</head>
+
+<body>
+    <h1>The Psychic Game</h1>
+    <h4>Guess what letter I'm thinking of...</h4>
+    <p id="computer"></p>
+    <p id="user"></p>
+    <p id="wins"></p>
+    <p id="losses"></p>
+    <p id="chances"></p>
+    <p id="guesses"></p>
+
+    <script>
+        var wins = 0
+        var losses = 0
+        var chances = 10
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var guessChoices = [];
+
+        var userText = document.getElementById("user");
+        var computerText = document.getElementById("computer");
+        var winsText = document.getElementById("wins");
+        var lossesText = document.getElementById("losses");
+        var chancesText = document.getElementById("chances");
+        var guessesText = document.getElementById("guesses");
+
+        document.onkeyup = function (event) {
+            if (chances > 0) {
+
+                var userGuess = event.key
+                var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+                var options = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+                console.log(userGuess, computerGuess);
+
+                if (userGuess === computerGuess) {
+                    wins++;
+                    chances = 10;
+                    guessChoices = [];
+
+                } else {
+                    chances--;
+                    guessChoices.push(userGuess);
+                }
+
+                computerText.textContent = "Computer has chosen: " + computerGuess
+                userText.textContent = "User has chosen: " + userGuess
+                winsText.textContent = "Wins: " + wins
+                lossesText.textContent = "Losses: " + losses
+                chancesText.textContent = "Guesses left: " + chances
+                guessesText.textContent = "Your guesses so far: " + guessChoices
+
+            } else {
+                losses++;
+                chances = 10;
+                guessChoices = [];
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>
